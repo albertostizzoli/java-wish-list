@@ -22,7 +22,7 @@ public class Christmas {
                     listGifts.add(line);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Errore nella lettura");
             }
         }
 
@@ -61,7 +61,7 @@ public class Christmas {
                 bw.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Errore nella scrittura");
         }
 
         // stampo la lista dei regali ordinati
