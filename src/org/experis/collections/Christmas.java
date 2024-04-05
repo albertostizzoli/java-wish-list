@@ -3,6 +3,7 @@ package org.experis.collections;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.io.*;
 
 public class Christmas {
     public static void main(String[] args) {
@@ -10,6 +11,20 @@ public class Christmas {
         Scanner scanner = new Scanner(System.in);
         // creo un'ArrayList per memorizzare i regali
         ArrayList<String> listGifts = new ArrayList<>();
+
+        // Controllo se esiste già un file di regali
+        File file = new File("./resources/gifts.txt");
+        if (file.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    // aggiungo il regalo alla lista
+                    listGifts.add(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         // creo una variabile booleana per controllare se l'utente desidera continuare ad inserire regali
         boolean continua = true;
@@ -38,6 +53,16 @@ public class Christmas {
 
         // ordino la lista in ordine alfabetico
         Collections.sort(listGifts);
+
+        // Salvo la lista su file
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            for (String gift : listGifts) {
+                bw.write(gift);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // stampo la lista dei regali ordinati
         for(String gift : listGifts){
