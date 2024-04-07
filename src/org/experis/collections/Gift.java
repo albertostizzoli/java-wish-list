@@ -1,6 +1,8 @@
 package org.experis.collections;
 
 public class Gift {
+
+    // Attributo
     private String name;
 
     // Costruttore
